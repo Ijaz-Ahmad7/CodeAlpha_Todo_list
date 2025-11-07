@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow - Advanced To-Do List</title>
+  </head>
+  <body>
+    <div class="app-wrapper">
+      <nav class="navbar">
+        <div class="navbar-content">
+          <h1 class="app-title">TaskFlow</h1>
+          <div class="navbar-actions">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search tasks...">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+              <span class="theme-icon">🌙</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div class="sidebar">
+          <div class="stats-card">
+            <h3>Overview</h3>
+            <div class="stat-item">
+              <span class="stat-label">Total Tasks</span>
+              <span class="stat-value" id="totalTasks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Completed</span>
+              <span class="stat-value completed-color" id="completedCount">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Active</span>
+              <span class="stat-value active-color" id="activeTasks">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Completion Rate</span>
+              <span class="stat-value" id="completionRate">0%</span>
+            </div>
+          </div>
+
+          <div class="categories-card">
+            <h3>Categories</h3>
+            <div id="categoriesList" class="categories-list"></div>
+          </div>
+
+          <div class="priority-legend">
+            <h3>Priority Levels</h3>
+            <div class="priority-item">
+              <span class="priority-dot high"></span>
+              <span>High</span>
+            </div>
+            <div class="priority-item">
+              <span class="priority-dot medium"></span>
+              <span>Medium</span>
+            </div>
+            <div class="priority-item">
+              <span class="priority-dot low"></span>
+              <span>Low</span>
+            </div>
+          </div>
+        </div>
+
+        <main class="main-content">
+          <div class="add-task-section">
+            <form id="todoForm" class="todo-form">
+              <input
+                type="text"
+                id="todoInput"
+                placeholder="What needs to be done today?"
+                required
+                autocomplete="off"
+              >
+              <select id="categorySelect" class="category-select">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="shopping">Shopping</option>
+                <option value="health">Health</option>
+                <option value="other">Other</option>
+              </select>
+              <select id="prioritySelect" class="priority-select">
+                <option value="medium">Priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              <input type="date" id="dueDateInput" class="due-date-input">
+              <button type="submit" class="add-btn">
+                <span>+</span> Add Task
+              </button>
+            </form>
+          </div>
+
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="completed">Completed</button>
+            <button class="filter-btn" data-filter="high">High Priority</button>
+            <button class="sort-btn" id="sortBtn" title="Sort by due date">📅</button>
+          </div>
+
+          <ul id="todoList" class="todo-list"></ul>
+
+          <div class="empty-state hidden" id="emptyState">
+            <div class="empty-icon">✓</div>
+            <h2>No tasks found</h2>
+            <p>Start adding tasks to get organized!</p>
+          </div>
+
+          <div class="stats-footer">
+            <span id="taskCount">0 tasks remaining</span>
+            <button id="clearCompleted" class="clear-btn">Clear completed</button>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div id="editModal" class="modal hidden">
+      <div class="modal-content">
+        <button class="modal-close">✕</button>
+        <h2>Edit Task</h2>
+        <input type="text" id="editInput" placeholder="Task description...">
+        <select id="editCategory" class="category-select">
+          <option value="work">Work</option>
+          <option value="personal">Personal</option>
+          <option value="shopping">Shopping</option>
+          <option value="health">Health</option>
+          <option value="other">Other</option>
+        </select>
+        <select id="editPriority" class="priority-select">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <input type="date" id="editDueDate" class="due-date-input">
+        <div class="modal-actions">
+          <button id="saveEdit" class="save-btn">Save Changes</button>
+          <button id="cancelEdit" class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
